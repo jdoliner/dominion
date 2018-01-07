@@ -1,0 +1,12 @@
+#!/bin/sh
+
+tar xf /dev/stdin
+
+for i in $(find src -name "*.proto"); do \
+	protoc \
+		-I=src \
+        --python_out=src \
+        ${i} ; \
+done
+
+find src -regex ".*\.py" | xargs tar cf -

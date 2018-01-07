@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+message Card {
+  string name = 1;
+  int64 cost = 2;
+  repeated Type type = 3;
+  string text = 4;
+
+  enum Type {
+    Victory = 0;
+    Treasure = 1;
+    Action = 3;
+    Curse = 4;
+  }
+}
+
+message Pile {
+  Card card = 1;
+  int64 count = 2;
+}
+
+message Kingdom {
+  repeated Pile supply = 1;
+}
+
+message Player {
+  repeated Card deck = 1;
+  repeated Card hand = 2;
+  repeated Card discard = 3;
+  int64 score = 4;
+}
+
+message Game {
+  Kingdom kingdom = 1;
+  repeated Player players = 2;
+  repeated Card play = 3;
+  repeated Card trash = 4;
+  int64 turn = 5;
+  int64 active = 6;
+  Phase phase = 7;
+  int64 actions = 8;
+  int64 coin = 9;
+  int64 buys = 10;
+
+  enum Phase {
+    Action = 0;
+    Buy = 1;
+    Cleanup = 2;
+  }
+}
