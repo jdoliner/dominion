@@ -3,6 +3,14 @@ import dominion_pb2 as pb
 playFs = {}
 scoreFs = {}
 
+class Card:
+    def __init__(self, name, type, cost, play, score):
+        self.name = name
+        self.type = type
+        self.cost = cost
+        self.play = play
+        self.score = score
+
 
 def NewCard(name, type, cost, play, score):
     card = pb.Card()
