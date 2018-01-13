@@ -1,17 +1,20 @@
-import dominion_pb2 as pb
-
-playFs = {}
-scoreFs = {}
+from enum import Enum
 
 
-def NewCard(name, type, cost, play, score):
-    card = pb.Card()
-    card.name = name
-    card.type.extend(type)
-    card.cost = cost
-    playFs[name] = play
-    scoreFs[name] = score
-    return card
+class Type(Enum):
+    Victory = 0
+    Treasure = 1
+    Action = 2
+    Curse = 4
+
+
+class Card(object):
+    def __init__(self, name, type, cost, play, score):
+        self.name = name
+        self.type = type
+        self.cost = cost
+        self.play = play
+        self.score = score
 
 
 def PlusCoin(amount, game):
@@ -28,11 +31,11 @@ def VP(amount):
 
 
 # Victory
-Estate = NewCard("Estate", [pb.Card.Victory], 2, None, VP(1))
-Duchy = NewCard("Duchy", [pb.Card.Victory], 2, None, VP(1))
-Province = NewCard("Province", [pb.Card.Victory], 2, None, VP(1))
+Estate = Card("Estate", [Type.Victory], 2, None, VP(1))
+Duchy = Card("Duchy", [Type.Victory], 2, None, VP(1))
+Province = Card("Province", [Type.Victory], 2, None, VP(1))
 
 # Treasure
-Copper = NewCard("Copper", [pb.Card.Treasure], 0, Coin(1), None)
-Silver = NewCard("Silver", [pb.Card.Treasure], 3, Coin(2), None)
-Gold = NewCard("Gold", [pb.Card.Treasure], 6, Coin(3), None)
+Copper = Card("Copper", [Type.Treasure], 0, Coin(1), None)
+Silver = Card("Silver", [Type.Treasure], 3, Coin(2), None)
+Gold = Card("Gold", [Type.Treasure], 6, Coin(3), None)
