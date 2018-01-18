@@ -16,6 +16,9 @@ class Card(object):
         self.play = play
         self.score = score
 
+    def __repr__(self):
+        return self.name
+
 
 def PlusCoin(amount, game):
     game.coin += amount
