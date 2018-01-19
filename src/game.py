@@ -13,7 +13,9 @@ class Phase(Enum):
 class Game(object):
     def __init__(self, supply):
         self.kingdom = kingdom.Kingdom(supply)
-        self.players = [player.Player([card.Estate]*3 + [card.Copper]*7)]*2
+        self.players = [
+                player.Player([card.Estate]*3 + [card.Copper]*7),
+                player.Player([card.Estate]*3 + [card.Copper]*7)]
         for p in self.players:
             p.draw(5)
         self.play = []

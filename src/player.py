@@ -4,8 +4,8 @@ import random
 
 class Player(object):
     def __init__(self, deck):
-        self.deck = deck
-        self.discard = []
+        self.deck = []
+        self.discard = deck
         self.hand = []
         self.score = 0
 
@@ -15,7 +15,7 @@ class Player(object):
         for card in self.hand:
             result += repr(card) + " "
         result += "\n"
-        result += "Deck: %d cards\n" % len(self.hand)
+        result += "Deck: %d cards\n" % len(self.deck)
         result += "Discard: %d cards\n" % len(self.discard)
         return result
 
@@ -36,3 +36,4 @@ class Player(object):
                 return
             self.shuffle()
         self.hand.append(self.deck.pop())
+        self.draw(count - 1)
