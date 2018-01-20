@@ -16,7 +16,7 @@ class Card(object):
         self.play = play
         self.score = score
 
-    def __repr__(self):
+    def __str__(self):
         return self.name
 
 

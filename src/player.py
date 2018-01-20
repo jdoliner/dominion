@@ -1,19 +1,22 @@
 import util
 import random
+import card
 
 
 class Player(object):
-    def __init__(self, deck):
+    def __init__(self):
         self.deck = []
-        self.discard = deck
+        self.discard = [card.Estate, card.Estate, card.Estate,
+                        card.Copper, card.Copper, card.Copper, card.Copper,
+                        card.Copper, card.Copper, card.Copper]
         self.hand = []
         self.score = 0
 
-    def __repr__(self):
+    def __str__(self):
         result = ""
         result += "Hand:\n"
-        for card in self.hand:
-            result += repr(card) + " "
+        for c in self.hand:
+            result += str(c) + " "
         result += "\n"
         result += "Deck: %d cards\n" % len(self.deck)
         result += "Discard: %d cards\n" % len(self.discard)
