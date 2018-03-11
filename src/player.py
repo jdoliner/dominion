@@ -6,9 +6,10 @@ import card
 class Player(object):
     def __init__(self):
         self.deck = []
-        self.discard = [card.Estate, card.Estate, card.Estate,
-                        card.Copper, card.Copper, card.Copper, card.Copper,
-                        card.Copper, card.Copper, card.Copper]
+        self.discard = [card.Estate(), card.Estate(), card.Estate(),
+                        card.Copper(), card.Copper(), card.Copper(),
+                        card.Copper(), card.Copper(), card.Copper(),
+                        card.Copper()]
         self.hand = []
         self.score = 0
 

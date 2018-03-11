@@ -1,6 +1,9 @@
 from enum import Enum
 
 
+cards = []
+
+
 class Type(Enum):
     Victory = 0
     Treasure = 1
@@ -15,6 +18,7 @@ class Card(object):
         self.cost = cost
         self.play = play
         self.score = score
+        cards.append(self)
 
     def __str__(self):
         return self.name
@@ -34,11 +38,26 @@ def VP(amount):
 
 
 # Victory
-Estate = Card("Estate", [Type.Victory], 2, None, VP(1))
-Duchy = Card("Duchy", [Type.Victory], 2, None, VP(1))
-Province = Card("Province", [Type.Victory], 2, None, VP(1))
+def Estate():
+    return Card("Estate", [Type.Victory], 2, None, VP(1))
+
+
+def Duchy():
+    return Card("Duchy", [Type.Victory], 2, None, VP(1))
+
+
+def Province():
+    return Card("Province", [Type.Victory], 2, None, VP(1))
+
 
 # Treasure
-Copper = Card("Copper", [Type.Treasure], 0, Coin(1), None)
-Silver = Card("Silver", [Type.Treasure], 3, Coin(2), None)
-Gold = Card("Gold", [Type.Treasure], 6, Coin(3), None)
+def Copper():
+    return Card("Copper", [Type.Treasure], 0, Coin(1), None)
+
+
+def Silver():
+    return Card("Silver", [Type.Treasure], 3, Coin(2), None)
+
+
+def Gold():
+    return Card("Gold", [Type.Treasure], 6, Coin(3), None)
