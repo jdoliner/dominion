@@ -1,8 +1,9 @@
 package dominion
 
 type Game struct {
-	Players []*Player
-	Trash   []*Card
+	Players   []*Player
+	Trash     []*Card
+	Decisions []*Decision
 }
 
 func NewGame(players int) *Game {
@@ -17,13 +18,13 @@ type Player struct {
 	Actions int
 	Coin    int
 	Buys    int
-	Deck    []Card
-	Hand    []Card
-	Discard []Card
-	Play    []Card
+	Deck    []*Card
+	Hand    []*Card
+	Discard []*Card
+	Play    []*Card
 }
 
-func NewPlayer(deck []Card) *Player {
+func NewPlayer(deck []*Card) *Player {
 	return &Player{Deck: deck}
 }
 
@@ -49,4 +50,4 @@ type Choice struct {
 	Description string
 }
 
-type Decision []Choice
+type Decision []*Choice
