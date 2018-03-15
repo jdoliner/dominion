@@ -8,4 +8,6 @@ var (
 	Copper = &Card{Name: "Copper", Type: Treasure, Cost: 0, Score: 0}
 	Silver = &Card{Name: "Silver", Type: Treasure, Cost: 3, Score: 0}
 	Gold   = &Card{Name: "Gold", Type: Treasure, Cost: 6, Score: 0}
+
+	StartDeck = []*Card{Estate, Estate, Estate, Copper, Copper, Copper, Copper, Copper, Copper, Copper}
 )
