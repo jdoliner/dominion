@@ -9,8 +9,9 @@ import (
 
 type Game struct {
 	Players   []*Player
-	Trash     []*Card
+	Trash     Cards
 	Decisions []*Decision
+	Kingdom   *Kingdom
 }
 
 func NewGame(players int) *Game {
@@ -91,6 +92,18 @@ func (cs Cards) String() string {
 		cards = append(cards, c.String())
 	}
 	return strings.Join(cards, ", ")
+}
+
+type Kingdom struct {
+	Piles []Cards
+}
+
+func (k *Kingdom) String() string {
+	var piles []string
+	for _, p := range k.Piles {
+		piles = append(piles, p.String())
+	}
+	return strings.Join(piles, "\n")
 }
 
 type Choice struct {
