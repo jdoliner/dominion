@@ -8,16 +8,19 @@ import (
 )
 
 type Game struct {
-	Players   []*Player
-	Trash     Cards
-	Decisions []*Decision
-	Kingdom   *Kingdom
+	Players      []*Player
+	Trash        Cards
+	Kingdom      *Kingdom
+	Turn         int
+	ActivePlayer int
 }
 
 func NewGame(players int) *Game {
 	result := &Game{}
 	for i := 0; i < players; i++ {
 		result.Players = append(result.Players, NewPlayer(StartDeck))
+		result.Players[i].Shuffle()
+		result.Players[i].Draw(5)
 	}
 	return result
 }
@@ -27,28 +30,6 @@ func (g *Game) String() string {
 	for i, p := range g.Players {
 		result += fmt.Sprintf("Player %d:\n", i) + p.String() + "\n"
 	}
-	return result
-}
-
-type Player struct {
-	Actions int
-	Coin    int
-	Buys    int
-	Deck    Cards
-	Hand    Cards
-	Discard Cards
-	Play    Cards
-}
-
-func NewPlayer(deck []*Card) *Player {
-	return &Player{Deck: deck}
-}
-
-func (p *Player) String() string {
-	var result string
-	result += "Deck: " + p.Deck.String() + "\n"
-	result += "Hand: " + p.Hand.String() + "\n"
-	result += "Play: " + p.Play.String() + "\n"
 	return result
 }
 
@@ -105,10 +86,3 @@ func (k *Kingdom) String() string {
 	}
 	return strings.Join(piles, "\n")
 }
-
-type Choice struct {
-	Make        func(*Game)
-	Description string
-}
-
-type Decision []*Choice
