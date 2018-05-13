@@ -1,6 +1,8 @@
 package dominion
 
 import (
+	"sort"
+
 	"github.com/golang/go/src/math/rand"
 )
 
@@ -50,6 +52,34 @@ func (p *Player) Draw(n int) {
 	}
 	p.Hand = append(p.Hand, p.Deck[:n]...)
 	p.Deck = p.Deck[n:]
+}
+
+// Play p.Hand[card]
+func (p *Player) PlayCards(cards ...int) {
+	sort.Ints(cards)
+	var hand Cards
+	for i, c := range p.Hand {
+		if len(cards) == 0 {
+			break
+		}
+		if i == cards[0] {
+			p.Play = append(p.Play, c)
+		} else {
+			hand = append(hand, c)
+		}
+		cards = cards[1:]
+	}
+	p.Hand = hand
+}
+
+func (p *Player) PlayTreasures() {
+	var ts []int
+	for i, c := range p.Hand {
+		if c.Type.Is(Treasure) {
+			ts = append(ts, i)
+		}
+	}
+	p.PlayCards(ts...)
 }
 
 type Choice struct {

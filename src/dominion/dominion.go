@@ -42,6 +42,10 @@ const (
 	Curse
 )
 
+func (t Type) Is(u Type) bool {
+	return t&u != 0
+}
+
 type Card struct {
 	Name  string
 	Type  Type
