@@ -22,6 +22,7 @@ func NewGame(players int) *Game {
 		result.Players[i].Shuffle()
 		result.Players[i].Draw(5)
 	}
+	result.Kingdom = &Kingdom{Piles: StartKingdom}
 	return result
 }
 
@@ -30,6 +31,7 @@ func (g *Game) String() string {
 	for i, p := range g.Players {
 		result += fmt.Sprintf("Player %d:\n", i) + p.String() + "\n"
 	}
+	result += g.Kingdom.String() + "\n"
 	return result
 }
 

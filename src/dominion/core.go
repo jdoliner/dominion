@@ -9,5 +9,6 @@ var (
 	Silver = &Card{Name: "Silver", Type: Treasure, Cost: 3, Score: 0}
 	Gold   = &Card{Name: "Gold", Type: Treasure, Cost: 6, Score: 0}
 
-	StartDeck = []*Card{Estate, Estate, Estate, Copper, Copper, Copper, Copper, Copper, Copper, Copper}
+	StartDeck    = Cards{Estate, Estate, Estate, Copper, Copper, Copper, Copper, Copper, Copper, Copper}
+	StartKingdom = []Cards{}
 )
