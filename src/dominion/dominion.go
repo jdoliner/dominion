@@ -3,8 +3,6 @@ package dominion
 import (
 	"fmt"
 	"strings"
-
-	"github.com/fatih/color"
 )
 
 type Game struct {
@@ -31,6 +29,7 @@ func (g *Game) String() string {
 	for i, p := range g.Players {
 		result += fmt.Sprintf("Player %d:\n", i) + p.String() + "\n"
 	}
+	result += "Kingdom:\n"
 	result += g.Kingdom.String() + "\n"
 	return result
 }
@@ -48,39 +47,6 @@ func (t Type) Is(u Type) bool {
 	return t&u != 0
 }
 
-type Card struct {
-	Name  string
-	Type  Type
-	Cost  int
-	Score int
-	Play  func(*Game)
-}
-
-func (c *Card) String() string {
-	switch c.Type {
-	case Victory:
-		return color.New(color.FgGreen).SprintFunc()(c.Name)
-	case Treasure:
-		return color.New(color.FgYellow).SprintFunc()(c.Name)
-	case Action:
-		return color.New(color.FgWhite).SprintFunc()(c.Name)
-	case Curse:
-		return color.New(color.FgMagenta).SprintFunc()(c.Name)
-	default:
-		return c.Name
-	}
-}
-
-type Cards []*Card
-
-func (cs Cards) String() string {
-	var cards []string
-	for _, c := range cs {
-		cards = append(cards, c.String())
-	}
-	return strings.Join(cards, ", ")
-}
-
 type Kingdom struct {
 	Piles []Cards
 }
@@ -88,7 +54,11 @@ type Kingdom struct {
 func (k *Kingdom) String() string {
 	var piles []string
 	for _, p := range k.Piles {
-		piles = append(piles, p.String())
+		if len(p) > 0 {
+			piles = append(piles, fmt.Sprintf("[%s x %d]", p[0].String(), len(p)))
+		} else {
+			piles = append(piles, "[ ]")
+		}
 	}
 	return strings.Join(piles, "\n")
 }
