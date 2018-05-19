@@ -5,9 +5,9 @@ var (
 	Duchy    = &Card{Name: "Duchy", Type: Victory, Cost: 5, Score: 3}
 	Province = &Card{Name: "Provence", Type: Victory, Cost: 8, Score: 6}
 
-	Copper = &Card{Name: "Copper", Type: Treasure, Cost: 0, Score: 0}
-	Silver = &Card{Name: "Silver", Type: Treasure, Cost: 3, Score: 0}
-	Gold   = &Card{Name: "Gold", Type: Treasure, Cost: 6, Score: 0}
+	Copper = &Card{Name: "Copper", Type: Treasure, Cost: 0, Score: 0, Play: PlusCoin(1)}
+	Silver = &Card{Name: "Silver", Type: Treasure, Cost: 3, Score: 0, Play: PlusCoin(2)}
+	Gold   = &Card{Name: "Gold", Type: Treasure, Cost: 6, Score: 0, Play: PlusCoin(3)}
 
 	StartDeck = Cards{
 		Estate, Estate, Estate,
@@ -18,3 +18,9 @@ var (
 		NewCards(Copper, 46), NewCards(Silver, 40), NewCards(Gold, 30),
 	}
 )
+
+func PlusCoin(coin int) func(*Game) {
+	return func(g *Game) {
+		g.ActivePlayer().Coin += coin
+	}
+}

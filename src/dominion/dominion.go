@@ -6,11 +6,11 @@ import (
 )
 
 type Game struct {
-	Players      []*Player
-	Trash        Cards
-	Kingdom      *Kingdom
-	Turn         int
-	ActivePlayer int
+	Players []*Player
+	active  int8 // index into slice above
+	Trash   Cards
+	Kingdom *Kingdom
+	Turn    int
 }
 
 func NewGame(players int) *Game {
@@ -32,6 +32,18 @@ func (g *Game) String() string {
 	result += "Kingdom:\n"
 	result += g.Kingdom.String() + "\n"
 	return result
+}
+
+func (g *Game) ActivePlayer() *Player {
+	return g.Players[g.active]
+}
+
+func (g *Game) EndTurn() {
+	g.active++
+	if g.active == 2 {
+		g.active = 0
+		g.Turn++
+	}
 }
 
 type Type int64
