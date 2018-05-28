@@ -48,3 +48,8 @@ func (cs Cards) String() string {
 	}
 	return strings.Join(cards, ", ")
 }
+
+func (cs Cards) MoveTo(dst Cards) {
+	dst = append(dst, cs...)
+	cs = nil
+}

@@ -7,7 +7,7 @@ import (
 
 type Game struct {
 	Players []*Player
-	active  int8 // index into slice above
+	active  int // index into slice above
 	Trash   Cards
 	Kingdom *Kingdom
 	Turn    int

@@ -1,6 +1,7 @@
 package dominion
 
 import (
+	"fmt"
 	"sort"
 
 	"github.com/golang/go/src/math/rand"
@@ -54,6 +55,11 @@ func (p *Player) Draw(n int) {
 	p.Deck = p.Deck[n:]
 }
 
+func (p *Player) Cleanup() {
+	p.Hand.MoveTo(p.Discard)
+	p.Play.MoveTo(p.Discard)
+}
+
 // Play p.Hand[card]
 func (p *Player) PlayCards(cards ...int) {
 	sort.Ints(cards)
@@ -64,10 +70,13 @@ func (p *Player) PlayCards(cards ...int) {
 		}
 		if i == cards[0] {
 			p.Play = append(p.Play, c)
+			cards = cards[1:]
 		} else {
 			hand = append(hand, c)
 		}
-		cards = cards[1:]
+	}
+	if len(cards) != 0 {
+		panic(fmt.Sprintf("%d is out of range of hand (len %d)", cards[0], len(p.Hand)))
 	}
 	p.Hand = hand
 }
