@@ -39,6 +39,8 @@ func (g *Game) ActivePlayer() *Player {
 }
 
 func (g *Game) EndTurn() {
+	g.ActivePlayer().Cleanup()
+	g.ActivePlayer().Draw(5)
 	g.active++
 	if g.active == 2 {
 		g.active = 0

@@ -35,5 +35,6 @@ func TestGame(t *testing.T) {
 	assert.Equal(t, 0, hand["Copper"])
 	assert.Equal(t, 0, play["Estate"])
 	assert.Equal(t, 5, hand["Estate"]+play["Copper"])
+	g.EndTurn()
 	fmt.Printf("%v", g.ActivePlayer())
 }
